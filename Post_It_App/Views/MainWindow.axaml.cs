@@ -16,7 +16,7 @@ public partial class MainWindow : ReactiveWindow<MainViewModel> {
     private async Task DoShowDialogAsync(InteractionContext<AddPostViewModel, PostViewModel?> interaction) {
 
         AddPostView dialog = new();
-        DataContext = interaction.Input;
+        dialog.DataContext = interaction.Input;
 
         PostViewModel? result = await dialog.ShowDialog<PostViewModel?>(this);
         interaction.SetOutput(result);
