@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Post_It_App.Model {
     public class PostManager {
+
+        private static readonly PostManager _instance = new PostManager();
         private readonly List<PostItem> _posts;
 
         public PostManager() {
             _posts = new List<PostItem>();
         }
-
+        public static PostManager Instance {
+            get {
+                return _instance;
+            }
+        }
         public void AddPost(PostItem post) {
             _posts.Add(post);
         }

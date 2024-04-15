@@ -1,4 +1,5 @@
 ﻿using Avalonia.ReactiveUI;
+using Post_It_App.Model;
 using Post_It_App.ViewModels;
 using ReactiveUI;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ public partial class MainWindow : ReactiveWindow<MainViewModel> {
 
         AddPostView dialog = new();
         dialog.DataContext = interaction.Input;
+
 
         PostViewModel? result = await dialog.ShowDialog<PostViewModel?>(this);
         interaction.SetOutput(result);

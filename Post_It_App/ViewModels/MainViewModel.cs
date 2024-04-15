@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using Post_It_App.Model;
+using ReactiveUI;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using System.Threading.Channels;
 using System.Windows.Input;

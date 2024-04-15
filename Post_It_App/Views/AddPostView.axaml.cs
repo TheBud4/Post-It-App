@@ -1,21 +1,26 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Post_It_App.Model;
+using System;
 using System.Diagnostics;
 
-namespace Post_It_App.Views;
-public partial class AddPostView : Window {
+namespace Post_It_App.Views {
+    public partial class AddPostView : Window {
+        public AddPostView() {
+            InitializeComponent();
+        }
 
-    public PostManager manager = new();
-    public AddPostView() {
-        InitializeComponent();
-    }
+        private void SavePost(object? sender, RoutedEventArgs e) {
 
+            PostItem? post = new(Name.Text, Description.Text);
 
-    private void SavePost(object? sender, RoutedEventArgs e) {
+            PostManager.Instance.AddPost(post);
 
-        PostItem? post = new(Name.Text, Description.Text);
-        Debug.WriteLine("Post adicionado: " + post.Title + post.Description);
-        Close();
+            foreach (var a in PostManager.Instance.GetAllPosts()) {
+                Debug.WriteLine($"Título: {a.Title}, Descrição: {a.Description}");
+            }
+
+            Close();
+        }
     }
 }
