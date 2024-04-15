@@ -8,16 +8,17 @@ namespace Post_It_App.Views;
 public partial class MainWindow : ReactiveWindow<MainViewModel> {
     public MainWindow() {
         InitializeComponent();
+
         this.WhenActivated(action =>
             action(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
     }
 
     private async Task DoShowDialogAsync(InteractionContext<AddPostViewModel, PostViewModel?> interaction) {
 
-        var dialog = new AddPostView();
+        AddPostView dialog = new();
         DataContext = interaction.Input;
 
-        var result = await dialog.ShowDialog<PostViewModel?>(this);
+        PostViewModel? result = await dialog.ShowDialog<PostViewModel?>(this);
         interaction.SetOutput(result);
     }
 }

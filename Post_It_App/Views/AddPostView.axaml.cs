@@ -1,15 +1,21 @@
 using Avalonia.Controls;
-using Avalonia.ReactiveUI;
-using Post_It_App.ViewModels;
+using Avalonia.Interactivity;
+using Post_It_App.Model;
+using System.Diagnostics;
 
 namespace Post_It_App.Views;
-public partial class AddPostView : ReactiveWindow<AddPostViewModel> {
+public partial class AddPostView : Window {
+
+    public PostManager manager = new();
     public AddPostView() {
         InitializeComponent();
     }
 
 
-    private void SavePost(object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
+    private void SavePost(object? sender, RoutedEventArgs e) {
+
+        PostItem? post = new(Name.Text, Description.Text);
+        Debug.WriteLine("Post adicionado: " + post.Title + post.Description);
         Close();
     }
 }
