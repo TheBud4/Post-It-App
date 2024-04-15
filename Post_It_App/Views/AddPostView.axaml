@@ -90,7 +90,7 @@
 				FontWeight="SemiBold"
 				VerticalContentAlignment="Center"
 				HorizontalContentAlignment="Center"
-				
+				Click="SavePost"
 				/>
 		</Grid>
 	</Panel>

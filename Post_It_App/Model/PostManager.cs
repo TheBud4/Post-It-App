@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Post_It_App.Model {
-    internal class PostManager {
+    public class PostManager {
         private readonly List<PostItem> _posts;
 
         public PostManager() {

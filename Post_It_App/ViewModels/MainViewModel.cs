@@ -18,5 +18,5 @@ public class MainViewModel : ViewModelBase {
         });
     }
     public ICommand AddPostCommand { get; }
-    public Interaction<AddPostViewModel, PostViewModel?> ShowDialog { get; set; }
+    public Interaction<AddPostViewModel, PostViewModel?> ShowDialog { get; }
 }
