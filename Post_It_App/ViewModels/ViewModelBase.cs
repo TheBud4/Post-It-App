@@ -2,6 +2,5 @@
 
 namespace Post_It_App.ViewModels;
 
-public class ViewModelBase : ReactiveObject
-{
+public class ViewModelBase : ReactiveObject {
 }
