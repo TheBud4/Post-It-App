@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Post_It_App.Model;
 public class PostItem {
@@ -10,4 +12,6 @@ public class PostItem {
         Description = description;
         Id = new Random().Next(1000, 9999);
     }
+
+
 }

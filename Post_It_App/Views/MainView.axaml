@@ -54,9 +54,9 @@
 					VerticalAlignment="Center"
 					Width="600"
 					BorderBrush="Transparent"
+					Text="{Binding SearchText}"
 					/>
-					<!--Text="{Binding SearchText}" 
-					<ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" />-->
+					<ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" />
 				</StackPanel>
 			</Border>
 		</Panel>
@@ -70,7 +70,8 @@
 				VerticalScrollBarVisibility="Visible"
 				>
 				<ListBox
-					
+					ItemsSource="{Binding SearchResults}"
+					SelectedItem="{Binding SelectedPost}"
 					Background="Transparent"
 					Margin="0 20"
 					VerticalAlignment="Center"
