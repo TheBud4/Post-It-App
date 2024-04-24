@@ -5,6 +5,6 @@ using System.Reactive;
 using System.Windows.Input;
 
 namespace Post_It_App.ViewModels;
-public class AddPostViewModel {
+public class AddPostViewModel : ReactiveObject {
 
 }

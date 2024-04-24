@@ -1,7 +1,9 @@
-﻿using Post_It_App.Model;
+﻿using DynamicData.Binding;
+using Post_It_App.Model;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reactive.Linq;
 using System.Threading.Channels;
@@ -20,11 +22,10 @@ public class MainViewModel : ViewModelBase {
             AddPostViewModel post = new();
 
             PostViewModel result = await ShowDialog.Handle(post);
-
         });
 
         this.WhenAnyValue(x => x.SearchText).Subscribe(DoSearch!);
-        DoSearch("");
+
     }
     public ICommand AddPostCommand { get; }
     public Interaction<AddPostViewModel, PostViewModel?> ShowDialog { get; }
@@ -36,18 +37,11 @@ public class MainViewModel : ViewModelBase {
     public ObservableCollection<PostViewModel> SearchResults { get; } = new();
 
     private string? _searchText;
-    private bool _isBusy;
 
     public string? SearchText {
         get => _searchText;
         set => this.RaiseAndSetIfChanged(ref _searchText, value);
     }
-
-    public bool IsBusy {
-        get => _isBusy;
-        set => this.RaiseAndSetIfChanged(ref _isBusy, value);
-    }
-
 
     public PostViewModel? SelectedPost {
         get => _selectedPost;
@@ -56,7 +50,6 @@ public class MainViewModel : ViewModelBase {
 
     private void DoSearch(string? input) {
 
-        IsBusy = true;
         SearchResults.Clear();
 
 
@@ -76,7 +69,6 @@ public class MainViewModel : ViewModelBase {
             }
         }
 
-        IsBusy = false;
     }
 
 
