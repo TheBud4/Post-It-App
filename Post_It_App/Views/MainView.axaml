@@ -91,6 +91,7 @@
 		<!-- Footer -->
 		<Panel
 			Classes="Footer"
+            
 			Background="#3E3E42"
 			VerticalAlignment="Bottom"
 			HorizontalAlignment="Stretch"
