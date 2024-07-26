@@ -65,8 +65,7 @@
 		<StackPanel
 			HorizontalAlignment="Center"
 			Margin="0,100,0,40"
-			Width="1000"
-			>
+			Width="1000">
 			<ScrollViewer
 				VerticalScrollBarVisibility="Visible"
 				>
@@ -79,17 +78,24 @@
 					HorizontalAlignment="Center"
 					Height="425"
 					 >
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<WrapPanel />
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+   					 <DataTemplate>
+       					 <Border CornerRadius="50" Padding="60" 
+						 Background="#3E3E42" BorderBrush="#007ACC" BorderThickness="2">
+            				<StackPanel Spacing="10">
+                				<TextBlock Text="{Binding Title}" FontWeight="Bold" Foreground="White" FontSize="18" />
+               				    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="#D3D3D3" FontSize="14" MaxWidth="500" />
+           				 </StackPanel>
+       				 </Border>
+   				 </DataTemplate>
+			 </ListBox.ItemTemplate>
 				</ListBox>
 			</ScrollViewer>
 		</StackPanel>
 		<!-- Footer -->
 		<Panel
 			Classes="Footer"
+            
 			Background="#3E3E42"
 			VerticalAlignment="Bottom"
 			HorizontalAlignment="Stretch"
