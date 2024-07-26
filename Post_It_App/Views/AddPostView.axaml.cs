@@ -7,6 +7,7 @@ namespace Post_It_App.Views {
     public partial class AddPostView : Window {
         public AddPostView() {
             InitializeComponent();
+            
         }
 
         private void SavePost(object? sender, RoutedEventArgs e) {
@@ -16,7 +17,7 @@ namespace Post_It_App.Views {
             PostManager.Instance.AddPost(post);
 
             //foreach (var a in PostManager.Instance.GetAllPosts()) {
-            //    Debug.WriteLine($"Título: {a.Title}, Descrição: {a.Description}");
+            //    Debug.WriteLine($"Tï¿½tulo: {a.Title}, Descriï¿½ï¿½o: {a.Description}");
             //}
 
             Close();

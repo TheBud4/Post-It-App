@@ -26,7 +26,6 @@
 		<Panel
 			HorizontalAlignment="Stretch"
 			VerticalAlignment="Top"
-			Classes="Header"
 			Height="128"
 		>
 			<Border
@@ -46,7 +45,7 @@
 				>
 					<PathIcon
 						Margin="25,10,10,10"
-						Data="{StaticResource search_regular}"
+						Data="{StaticResource SearchRegular}"
 						Foreground="#007ACC"
 						/>
 					<TextBox
@@ -110,7 +109,7 @@
 				Command="{Binding AddPostCommand}"
 				>
 				<PathIcon
-					Data="{StaticResource add_circle_regular}"
+					Data="{StaticResource AddCircleRegular}"
 					Width="40"
 					Height="40"
 					Foreground="#007ACC"

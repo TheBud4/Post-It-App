@@ -1,52 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Post_It_App.Model;
 public class PostManager {
+    private readonly List<PostItem?> _posts = [];
 
-    private static readonly PostManager _instance = new();
+    public static PostManager Instance { get; } = new();
 
-    private readonly List<PostItem> _posts;
-
-    public PostManager() {
-        _posts = new();
-    }
-    public static PostManager Instance {
-        get {
-            return _instance;
-        }
-    }
-    public void AddPost(PostItem post) {
+    public void AddPost(PostItem? post) {
         _posts.Add(post);
     }
 
-    public void UpdatePost(int id, string title, string description) {
-        var post = _posts.FirstOrDefault(p => p.Id == id);
-        if (post != null) {
-            post.Title = title;
-            post.Description = description;
-        }
+    public void UpdatePost(int id, string? title, string? description) {
+        var post = _posts.FirstOrDefault(p => p != null && p.Id == id);
+        if (post == null) return;
+        post.Title = title;
+        post.Description = description;
     }
 
     public void DeletePost(int id) {
-        var post = _posts.FirstOrDefault(p => p.Id == id);
+        var post = _posts.FirstOrDefault(p => p != null && p.Id == id);
         if (post != null) {
             _posts.Remove(post);
         }
     }
 
-    public List<PostItem> GetAllPosts() {
+    public List<PostItem?> GetAllPosts() {
         return _posts.ToList();
     }
 
-    public PostItem GetPostById(int id) {
-        return _posts.FirstOrDefault(p => p.Id == id);
+    public PostItem? GetPostById(int id) {
+        return _posts.FirstOrDefault(p => p != null && p.Id == id);
     }
 
-    public List<PostItem> SearchPostsReturn(string searchTerm) {
-        return _posts.FindAll(p => p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm));
+    public List<PostItem?> SearchPostsReturn(string searchTerm) {
+        return _posts.FindAll(p => p?.Description != null && p is { Title: not null } && (p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm)));
     }
 }
 
