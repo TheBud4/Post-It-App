@@ -1,76 +1,82 @@
-﻿using DynamicData.Binding;
-using Post_It_App.Model;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Reactive.Linq;
-using System.Threading.Channels;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.Input;
+using Post_It_App.Model;
+using Post_It_App.Views;
 
 namespace Post_It_App.ViewModels;
 
-public class MainViewModel : ViewModelBase {
+    public class MainViewModel : ViewModelBase
+    {
+        public ObservableCollection<PostViewModel> Posts { get; set; }
 
-    public MainViewModel() {
+        public MainViewModel()
+        {
+            OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
+            Posts = [];
+        }
 
-        ShowDialog = new Interaction<AddPostViewModel, PostViewModel?>();
+        public ICommand OpenAddPostWindowCommand { get; }
 
-        AddPostCommand = ReactiveCommand.CreateFromTask(async () => {
+        private async Task OpenAddPostWindow()
+        {
+            var addPostWindow = new AddPostView();
+            var addPostViewModel = new AddPostViewModel();
+            addPostWindow.DataContext = addPostViewModel;
 
-            AddPostViewModel post = new();
+            if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
+                bool result = false;
+                PostItem newPost = null;
+                
+                addPostViewModel.RequestClose += post => {
+                    newPost = post;
+                    result = true;
+                    addPostWindow.Close(result);
+                };
 
-            PostViewModel result = await ShowDialog.Handle(post);
-        });
+                // Showing the dialog
+                await addPostWindow.ShowDialog<bool>(desktop.MainWindow);
 
-        this.WhenAnyValue(x => x.SearchText).Subscribe(DoSearch!);
-
-    }
-    public ICommand AddPostCommand { get; }
-    public Interaction<AddPostViewModel, PostViewModel?> ShowDialog { get; }
-
-    //Search
-
-    private PostViewModel? _selectedPost;
-
-    public ObservableCollection<PostViewModel> SearchResults { get; } = new();
-
-    private string? _searchText;
-
-    public string? SearchText {
-        get => _searchText;
-        set => this.RaiseAndSetIfChanged(ref _searchText, value);
-    }
-
-    public PostViewModel? SelectedPost {
-        get => _selectedPost;
-        set => this.RaiseAndSetIfChanged(ref _selectedPost, value);
-    }
-
-    private void DoSearch(string? input) {
-
-        SearchResults.Clear();
-
-
-        if (!string.IsNullOrWhiteSpace(input)) {
-            var posts = PostManager.Instance.SearchPostsReturn(input);
-
-            foreach (var post in posts) {
-                var vm = new PostViewModel(post);
-                SearchResults.Add(vm);
-            }
-        } else {
-            var posts = PostManager.Instance.GetAllPosts();
-
-            foreach (var post in posts) {
-                var vm = new PostViewModel(post);
-                SearchResults.Add(vm);
+                if (result && newPost != null)
+                {
+                    AddPost(newPost);
+                }
             }
         }
 
+        // Adiciona um post na lista de posts
+        private void AddPost(PostItem post)
+        {
+            Posts.Add(new PostViewModel(post));
+        }
+        
+        //Atualiza um post
+        public void UpdatePost(int id, string? title, string? description) {
+            var post = Posts.FirstOrDefault(p => p.Id == id);
+            if (post == null) return;
+            //ToDo: Implementar a atualização do post
+            
+        }
+        
+        //Deleta um post
+        public void DeletePost(int id) {
+            var post = Posts.FirstOrDefault(p => p.Id == id);
+            if (post != null) {
+                Posts.Remove(post);
+            }
+        }
+        // Busca posts na lista
+        // ToDo: Implementar a busca de posts
+        // public PostItem? GetPostById(int id) {
+        //     return _posts.FirstOrDefault(p => p != null && p.Id == id);
+        // }
+        //
+        // public List<PostItem?> SearchPostsReturn(string searchTerm) {
+        //     return _posts.FindAll(p => p?.Description != null && p is { Title: not null } && (p.Title.Contains(searchTerm) || p.Description.Contains(searchTerm)));
+        // }
+        
     }
-
-
-}

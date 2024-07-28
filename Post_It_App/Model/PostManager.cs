@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Post_It_App.Model;
 public class PostManager {
+
     private readonly List<PostItem?> _posts = [];
 
     public static PostManager Instance { get; } = new();

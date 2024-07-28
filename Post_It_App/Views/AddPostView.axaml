@@ -2,12 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Post_It_App.ViewModels"
         mc:Ignorable="d"
 		d:DesignWidth="800"
 		d:DesignHeight="450"
 		Width="800"
 		Height="450"
         x:Class="Post_It_App.Views.AddPostView"
+        x:DataType="viewModels:AddPostViewModel"
         Title="Add Post"
 		Background="#2d2d30"
 		WindowStartupLocation="CenterOwner"
@@ -45,7 +47,7 @@
 					Background="#6B6B71"
 					Width="600"
 					BorderBrush="Transparent"
-					x:Name="Name"
+					Text="{Binding Title}"
 					/>
 			</StackPanel>
 			<StackPanel
@@ -73,7 +75,7 @@
 					Width="600"
 					Height="100"
 					BorderBrush="Transparent"
-					x:Name="Description"
+					Text="{Binding Description}"
 					
 					/>
 			</StackPanel>
@@ -90,7 +92,7 @@
 				FontWeight="SemiBold"
 				VerticalContentAlignment="Center"
 				HorizontalContentAlignment="Center"
-				Click="SavePost"
+				Command="{Binding SaveCommand}"
 				/>
 		</Grid>
 	</Panel>
