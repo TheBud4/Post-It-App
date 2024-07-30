@@ -22,5 +22,10 @@
 
   <ItemGroup>
     <Compile Remove="Model\PostManager.cs" />
+    <Compile Remove="ListView.axaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="ListView.axaml" />
   </ItemGroup>
 </Project>

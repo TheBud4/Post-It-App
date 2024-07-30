@@ -20,24 +20,30 @@
 			>
 			<Panel
 				Background="#6B6B71"
+				Width="200"
 				>
-				<Panel
-					Height="200"
-					>
-					<Grid Height="200">
+				<Panel>
+					<StackPanel 
+						Height="200" 
+						Width="190"
+						>
 						<TextBlock
 							Text="{Binding Title}"
 							Foreground="White"
 							VerticalAlignment="Top"
 							FontSize="20"
-							Margin="15,10,0,0" />
+							Margin="15,10,0,0"
+							TextTrimming="CharacterEllipsis"
+							/>
 						<TextBlock
 							Text="{Binding Description}"
 							Foreground="White"
-							FontSize="20"
-							Margin="15,50,0,0" />
+							FontSize="16"
+							Margin="15,10,0,0" 
+							TextWrapping="Wrap"
+							/>
 
-					</Grid>
+					</StackPanel>
 				</Panel>
 			</Panel>
 		</Border>

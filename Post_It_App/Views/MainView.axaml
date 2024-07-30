@@ -39,7 +39,6 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Width="670"
-					Classes="SearchBar"
 					Orientation="Horizontal"
 				>
 					<PathIcon
@@ -47,15 +46,15 @@
 						Data="{StaticResource SearchRegular}"
 						Foreground="#007ACC"
 						/>
-					<!-- <TextBox -->
-					<!-- Watermark="Pesquise aqui..." -->
-					<!-- Opacity="0.5" -->
-					<!-- Background="Transparent" -->
-					<!-- VerticalAlignment="Center" -->
-					<!-- Width="600" -->
-					<!-- BorderBrush="Transparent" -->
-					<!-- Text="{Binding SearchText}" -->
-					<!-- /> -->
+					<TextBox
+					Watermark="Pesquise aqui..."
+					Opacity="0.5"
+					Background="Transparent"
+					VerticalAlignment="Center"
+					Width="600"
+					BorderBrush="Transparent"
+					Text="{Binding SearchText, Mode=TwoWay}"
+					/>
 
 				</StackPanel>
 			</Border>
@@ -64,36 +63,38 @@
 		<StackPanel
 			HorizontalAlignment="Center"
 			Margin="0,100,0,40"
-			Width="1000">
-			<ScrollViewer
+			Width="1000"
+			>
+			<ScrollViewer 
 				VerticalScrollBarVisibility="Visible"
+				Height="450"
 				>
-					<ListBox
-						Background="Transparent"
-						Margin="0 20"
-						VerticalAlignment="Center"
-						HorizontalAlignment="Center"
-						Height="425"
-						ItemsSource="{Binding Posts}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<local:PostView/>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
+				<ItemsControl 
+					HorizontalAlignment="Center"	
+					ItemsSource="{Binding Posts}"
+					>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel Orientation="Horizontal" />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<local:PostView Margin="10"  />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
 			</ScrollViewer>
 		</StackPanel>
+
 		<!-- Footer -->
 		<Panel
-			Classes="Footer"
 			Background="#3E3E42"
 			VerticalAlignment="Bottom"
 			HorizontalAlignment="Stretch"
 			Height="138"
-			Grid.Column="1"
 			>
 			<Button
-				Classes="AddButton"
 				VerticalAlignment="Center"
 				HorizontalAlignment="Center"
 				Width="69"
