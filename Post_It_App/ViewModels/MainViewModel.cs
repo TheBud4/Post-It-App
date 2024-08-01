@@ -14,21 +14,22 @@ namespace Post_It_App.ViewModels;
 
 public class MainViewModel : ViewModelBase {
     private string? _searchText;
-    private readonly List<PostViewModel> allPosts;
+    private readonly List<PostViewModel> _allPosts;
 
     public MainViewModel() {
         OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
 
-        allPosts = new List<PostViewModel> {
+        _allPosts = new List<PostViewModel> {
             new(new PostItem("Titulo Muito grande vai passar da borda", "Descrição do Post")),
             new(new PostItem("Post", "Descrição muito grande do Post vai passar da borda")),
         };
 
-        Posts = new ObservableCollection<PostViewModel>(allPosts);
+        Posts = new ObservableCollection<PostViewModel>(_allPosts);
 
         foreach (var postViewModel in Posts) {
             postViewModel.PostDeleted += OnPostDeleted;
         }
+        
     }
 
     public ObservableCollection<PostViewModel> Posts { get; set; }
@@ -59,7 +60,7 @@ public class MainViewModel : ViewModelBase {
                 addPostWindow.Close(result);
             };
 
-            await addPostWindow.ShowDialog<bool>(desktop.MainWindow);
+            await addPostWindow.ShowDialog<bool>(desktop.MainWindow!);
 
             if (result) AddPost(newPost);
         }
@@ -68,14 +69,14 @@ public class MainViewModel : ViewModelBase {
     private void AddPost(PostItem post) {
         var postViewModel = new PostViewModel(post);
         postViewModel.PostDeleted += OnPostDeleted;
-        allPosts.Add(postViewModel);
+        _allPosts.Add(postViewModel);
         Posts.Add(postViewModel);
     }
 
     private void OnPostDeleted(object? sender, EventArgs e) {
         if (sender is PostViewModel postViewModel) {
             Posts.Remove(postViewModel);
-            allPosts.Remove(postViewModel);
+            _allPosts.Remove(postViewModel);
         }
     }
 
@@ -83,10 +84,10 @@ public class MainViewModel : ViewModelBase {
         Posts.Clear();
 
         if (string.IsNullOrWhiteSpace(searchTerm)) {
-            foreach (var post in allPosts)
+            foreach (var post in _allPosts)
                 Posts.Add(post);
         } else {
-            foreach (var post in allPosts.Where(p =>
+            foreach (var post in _allPosts.Where(p =>
                          (p.Title?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                          (p.Description?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)))
                 Posts.Add(post);
