@@ -19,28 +19,16 @@ public class MainViewModel : ViewModelBase {
     public MainViewModel() {
         OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
 
-
-        //ToDo: Remover os posts de exemplo antes de publicar
-        //allPosts = new List<PostViewModel>();
         allPosts = new List<PostViewModel> {
             new(new PostItem("Titulo Muito grande vai passar da borda", "Descrição do Post")),
             new(new PostItem("Post", "Descrição muito grande do Post vai passar da borda")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição do Post"))
         };
 
         Posts = new ObservableCollection<PostViewModel>(allPosts);
+
+        foreach (var postViewModel in Posts) {
+            postViewModel.PostDeleted += OnPostDeleted;
+        }
     }
 
     public ObservableCollection<PostViewModel> Posts { get; set; }
@@ -58,6 +46,7 @@ public class MainViewModel : ViewModelBase {
     private async Task OpenAddPostWindow() {
         var addPostWindow = new AddPostView();
         var addPostViewModel = new AddPostViewModel();
+        
         addPostWindow.DataContext = addPostViewModel;
 
         if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
@@ -70,7 +59,6 @@ public class MainViewModel : ViewModelBase {
                 addPostWindow.Close(result);
             };
 
-            // Mostrar o diálogo
             await addPostWindow.ShowDialog<bool>(desktop.MainWindow);
 
             if (result) AddPost(newPost);
@@ -79,30 +67,29 @@ public class MainViewModel : ViewModelBase {
 
     private void AddPost(PostItem post) {
         var postViewModel = new PostViewModel(post);
+        postViewModel.PostDeleted += OnPostDeleted;
         allPosts.Add(postViewModel);
         Posts.Add(postViewModel);
     }
 
-    // Pesquisa de posts
+    private void OnPostDeleted(object? sender, EventArgs e) {
+        if (sender is PostViewModel postViewModel) {
+            Posts.Remove(postViewModel);
+            allPosts.Remove(postViewModel);
+        }
+    }
+
     private void SearchPosts(string? searchTerm) {
         Posts.Clear();
 
-        if (string.IsNullOrWhiteSpace(searchTerm))
+        if (string.IsNullOrWhiteSpace(searchTerm)) {
             foreach (var post in allPosts)
                 Posts.Add(post);
-        else
+        } else {
             foreach (var post in allPosts.Where(p =>
                          (p.Title?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                          (p.Description?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)))
                 Posts.Add(post);
-    }
-    // Pesquisa de posts
-
-    //Deletar post
-
-    public ICommand RemovePostCommand { get; }
-
-    private void RemovePost(PostViewModel postViewModel) {
-        Posts.Remove(postViewModel);
+        }
     }
 }

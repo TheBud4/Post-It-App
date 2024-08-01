@@ -36,7 +36,8 @@
             <Button
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Background="#3E3E42">
+                Background="#3E3E42"
+                Command="{Binding DeleteCommand}">
                 <PathIcon
                     Data="{StaticResource DeleteRegular}"
                     Width="20"
