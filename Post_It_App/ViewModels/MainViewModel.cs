@@ -18,8 +18,8 @@ public class MainViewModel : ViewModelBase {
 
     public MainViewModel() {
         OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
-        
-        
+
+
         //ToDo: Remover os posts de exemplo antes de publicar
         //allPosts = new List<PostViewModel>();
         allPosts = new List<PostViewModel> {
@@ -43,7 +43,7 @@ public class MainViewModel : ViewModelBase {
         Posts = new ObservableCollection<PostViewModel>(allPosts);
     }
 
-    public  ObservableCollection<PostViewModel> Posts { get; set; }
+    public ObservableCollection<PostViewModel> Posts { get; set; }
 
     public string? SearchText {
         get => _searchText;
@@ -82,6 +82,7 @@ public class MainViewModel : ViewModelBase {
         allPosts.Add(postViewModel);
         Posts.Add(postViewModel);
     }
+
     // Pesquisa de posts
     private void SearchPosts(string? searchTerm) {
         Posts.Clear();
@@ -96,12 +97,12 @@ public class MainViewModel : ViewModelBase {
                 Posts.Add(post);
     }
     // Pesquisa de posts
-    
+
     //Deletar post
-    
+
     public ICommand RemovePostCommand { get; }
+
     private void RemovePost(PostViewModel postViewModel) {
         Posts.Remove(postViewModel);
     }
-    
 }

@@ -36,9 +36,7 @@
             <Button
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Background="#3E3E42"
-                
-                >
+                Background="#3E3E42">
                 <PathIcon
                     Data="{StaticResource DeleteRegular}"
                     Width="20"

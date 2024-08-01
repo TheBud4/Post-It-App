@@ -5,114 +5,102 @@
              xmlns:vm="clr-namespace:Post_It_App.ViewModels"
              xmlns:local="clr-namespace:Post_It_App.Views"
              mc:Ignorable="d"
-			 d:DesignWidth="1300"
-			 d:DesignHeight="700"
-			 Width="1300"
-			 Height="700"
+             d:DesignWidth="1300"
+             d:DesignHeight="700"
+             Width="1300"
+             Height="700"
              x:Class="Post_It_App.Views.MainView"
              x:DataType="vm:MainViewModel"
-			 Background="#2d2d30"
-			 >
-	<Design.DataContext>
-		<!-- This only sets the DataContext for the previewer in an IDE,
+             Background="#2d2d30">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainViewModel />
-	</Design.DataContext>
-	<Grid>
-		<!-- Cabeçalho-->
+        <vm:MainViewModel />
+    </Design.DataContext>
+    <Grid>
+        <!-- Cabeçalho-->
 
-		<!-- Conteudo -->
-		<Panel
-			HorizontalAlignment="Stretch"
-			VerticalAlignment="Top"
-			Height="128"
-		>
-			<Border
-				VerticalAlignment="Center"
-				HorizontalAlignment="Center"
-				Width="671"
-				Background="#3E3E42"
-				Margin="5"
-				CornerRadius="100"
-					>
-				<StackPanel
-					VerticalAlignment="Center"
-					HorizontalAlignment="Center"
-					Width="670"
-					Orientation="Horizontal"
-				>
-					<PathIcon
-						Margin="25,10,10,10"
-						Data="{StaticResource SearchRegular}"
-						Foreground="#007ACC"
-						/>
-					<TextBox
-					Watermark="Pesquise aqui..."
-					Opacity="0.5"
-					Background="Transparent"
-					VerticalAlignment="Center"
-					Width="600"
-					BorderBrush="Transparent"
-					Text="{Binding SearchText, Mode=TwoWay}"
-					/>
+        <!-- Conteudo -->
+        <Panel
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Height="128">
+            <Border
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="671"
+                Background="#3E3E42"
+                Margin="5"
+                CornerRadius="100">
+                <StackPanel
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="670"
+                    Orientation="Horizontal">
+                    <PathIcon
+                        Margin="25,10,10,10"
+                        Data="{StaticResource SearchRegular}"
+                        Foreground="#007ACC" />
+                    <TextBox
+                        Watermark="Pesquise aqui..."
+                        Opacity="0.5"
+                        Background="Transparent"
+                        VerticalAlignment="Center"
+                        Width="600"
+                        BorderBrush="Transparent"
+                        Text="{Binding SearchText, Mode=TwoWay}" />
 
-				</StackPanel>
-			</Border>
-		</Panel>
-		<!-- Main -->
-		<StackPanel
-			HorizontalAlignment="Center"
-			Margin="0,100,0,40"
-			Width="1000"
-			>
-			<ScrollViewer 
-				VerticalScrollBarVisibility="Visible"
-				Height="450"
-				>
-				<ItemsControl 
-					HorizontalAlignment="Center"	
-					ItemsSource="{Binding Posts}"
-					>
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<WrapPanel Orientation="Horizontal" />
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<local:PostView Margin="10"  />
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-			</ScrollViewer>
-		</StackPanel>
+                </StackPanel>
+            </Border>
+        </Panel>
+        <!-- Main -->
+        <StackPanel
+            HorizontalAlignment="Center"
+            Margin="0,100,0,40"
+            Width="1000">
+            <ScrollViewer
+                VerticalScrollBarVisibility="Visible"
+                Height="450">
+                <ItemsControl
+                    HorizontalAlignment="Center"
+                    ItemsSource="{Binding Posts}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:PostView Margin="10" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
 
-		<!-- Footer -->
-		<Panel
-			Background="#3E3E42"
-			VerticalAlignment="Bottom"
-			HorizontalAlignment="Stretch"
-			Height="138"
-			>
-			<Button
-				VerticalAlignment="Center"
-				HorizontalAlignment="Center"
-				Width="69"
-				Height="69"
-				BorderThickness="2"
-				BorderBrush="#6B6B71"
-				Background="Transparent"
-				CornerRadius="10"
-				Command="{Binding OpenAddPostWindowCommand}"
-				>
-				<PathIcon
-					Data="{StaticResource AddCircleRegular}"
-					Width="40"
-					Height="40"
-					Foreground="#007ACC"
-				/>
-			</Button>
-		</Panel>
+        <!-- Footer -->
+        <Panel
+            Background="#3E3E42"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Stretch"
+            Height="138">
+            <Button
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="69"
+                Height="69"
+                BorderThickness="2"
+                BorderBrush="#6B6B71"
+                Background="Transparent"
+                CornerRadius="10"
+                Command="{Binding OpenAddPostWindowCommand}">
+                <PathIcon
+                    Data="{StaticResource AddCircleRegular}"
+                    Width="40"
+                    Height="40"
+                    Foreground="#007ACC" />
+            </Button>
+        </Panel>
 
-	</Grid>
+    </Grid>
 </UserControl>

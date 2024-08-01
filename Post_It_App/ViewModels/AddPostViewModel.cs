@@ -4,30 +4,29 @@ using CommunityToolkit.Mvvm.Input;
 using Post_It_App.Model;
 
 namespace Post_It_App.ViewModels;
+
 public class AddPostViewModel : ViewModelBase {
-    
     private string? _title;
-    
+
     private string? _description;
-    
-    public string? Title
-    {
+
+    public string? Title {
         get => _title;
         set => SetProperty(ref _title, value);
     }
 
-    public string? Description
-    {
+    public string? Description {
         get => _description;
         set => SetProperty(ref _description, value);
     }
-    
+
     public ICommand SaveCommand { get; }
+
     public AddPostViewModel() {
         SaveCommand = new RelayCommand(Save);
     }
-    private void Save()
-    {
+
+    private void Save() {
         // Lógica para criar um novo post
         var newPost = new PostItem(Title, Description);
 
@@ -42,8 +41,7 @@ public class AddPostViewModel : ViewModelBase {
     // Método para fechar o diálogo e retornar o resultado
     public event Action<PostItem>? RequestClose;
 
-    private void CloseDialog(PostItem post)
-    {
+    private void CloseDialog(PostItem post) {
         RequestClose?.Invoke(post);
     }
 }
