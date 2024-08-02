@@ -5,9 +5,9 @@ using CommunityToolkit.Mvvm.Input;
 namespace Post_It_App.ViewModels;
 
 public class EditPostViewModel : ViewModelBase {
-    private string _title;
-    private string _description;
     private readonly Action _onDelete;
+    private string _description;
+    private string _title;
 
     public EditPostViewModel(string title, string description, Action onDelete) {
         Title = title;

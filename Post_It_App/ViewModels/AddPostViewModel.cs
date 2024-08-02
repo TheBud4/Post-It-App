@@ -6,9 +6,12 @@ using Post_It_App.Model;
 namespace Post_It_App.ViewModels;
 
 public class AddPostViewModel : ViewModelBase {
+    private string? _description;
     private string? _title;
 
-    private string? _description;
+    public AddPostViewModel() {
+        SaveCommand = new RelayCommand(Save);
+    }
 
     public string? Title {
         get => _title;
@@ -21,10 +24,6 @@ public class AddPostViewModel : ViewModelBase {
     }
 
     public ICommand SaveCommand { get; }
-
-    public AddPostViewModel() {
-        SaveCommand = new RelayCommand(Save);
-    }
 
     private void Save() {
         // Lógica para criar um novo post

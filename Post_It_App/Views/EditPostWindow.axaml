@@ -2,8 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
-        xmlns:global="clr-namespace:"
         xmlns:viewModels="clr-namespace:Post_It_App.ViewModels"
         mc:Ignorable="d"
         x:Class="Post_It_App.Views.EditPostWindow"
@@ -23,8 +21,7 @@
             BorderThickness="0"
             TextWrapping="NoWrap"
             Height="52"
-            FontSize="30" 
-            />
+            FontSize="30" />
         <TextBox
             Text="{Binding Description, Mode=TwoWay}"
             AcceptsReturn="True"

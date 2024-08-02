@@ -33,8 +33,7 @@
                     Height="100"
                     Margin="15,10,0,0"
                     TextWrapping="Wrap"
-                    TextTrimming="CharacterEllipsis"
-                    />
+                    TextTrimming="CharacterEllipsis" />
             </StackPanel>
             <Panel
                 HorizontalAlignment="Right"

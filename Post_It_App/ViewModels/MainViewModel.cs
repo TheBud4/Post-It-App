@@ -13,8 +13,8 @@ using Post_It_App.Views;
 namespace Post_It_App.ViewModels;
 
 public class MainViewModel : ViewModelBase {
-    private string? _searchText;
     private readonly List<PostViewModel> _allPosts;
+    private string? _searchText;
 
     public MainViewModel() {
         OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
@@ -23,9 +23,7 @@ public class MainViewModel : ViewModelBase {
 
         Posts = new ObservableCollection<PostViewModel>(_allPosts);
 
-        foreach (var postViewModel in Posts) {
-            postViewModel.PostDeleted += OnPostDeleted;
-        }
+        foreach (var postViewModel in Posts) postViewModel.PostDeleted += OnPostDeleted;
     }
 
     public ObservableCollection<PostViewModel> Posts { get; set; }
@@ -79,15 +77,13 @@ public class MainViewModel : ViewModelBase {
     private void SearchPosts(string? searchTerm) {
         Posts.Clear();
 
-        if (string.IsNullOrWhiteSpace(searchTerm)) {
+        if (string.IsNullOrWhiteSpace(searchTerm))
             foreach (var post in _allPosts)
                 Posts.Add(post);
-        }
-        else {
+        else
             foreach (var post in _allPosts.Where(p =>
                          (p.Title?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                          (p.Description?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)))
                 Posts.Add(post);
-        }
     }
 }

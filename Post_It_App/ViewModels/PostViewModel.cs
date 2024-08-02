@@ -12,7 +12,6 @@ namespace Post_It_App.ViewModels;
 public class PostViewModel : ViewModelBase {
     private string? _postDescription;
     private string? _postTitle;
-    private PostItem Post { get; }
 
     public PostViewModel(PostItem post) {
         Post = post;
@@ -21,6 +20,8 @@ public class PostViewModel : ViewModelBase {
         _postDescription = Post.Description;
         _postTitle = Post.Title;
     }
+
+    private PostItem Post { get; }
 
     public string? Title {
         get => _postTitle;
@@ -48,13 +49,13 @@ public class PostViewModel : ViewModelBase {
             editWindow.DataContext = editViewModel;
 
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
-                bool result = false;
+                var result = false;
                 editViewModel.RequestClose += r => {
                     result = r;
                     editWindow.Close(result);
                 };
 
-                if (desktop.MainWindow != null) 
+                if (desktop.MainWindow != null)
                     await editWindow.ShowDialog<bool>(desktop.MainWindow);
 
                 if (result) {
