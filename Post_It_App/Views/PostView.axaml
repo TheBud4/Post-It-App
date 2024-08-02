@@ -30,20 +30,34 @@
                     Text="{Binding Description}"
                     Foreground="White"
                     FontSize="16"
+                    Height="100"
                     Margin="15,10,0,0"
-                    TextWrapping="Wrap" />
+                    TextWrapping="Wrap"
+                    TextTrimming="CharacterEllipsis"
+                    />
             </StackPanel>
-            <Button
+            <Panel
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Background="#3E3E42"
-                Command="{Binding DeleteCommand}">
-                <PathIcon
-                    Data="{StaticResource DeleteRegular}"
-                    Width="20"
-                    Height="20"
-                    Foreground="White" />
-            </Button>
+                Width="190"
+                Margin="0,0,0,5">
+                <Button
+                    Background="#007ACC"
+                    Command="{Binding EditCommand}">
+                    Editar
+                </Button>
+                <Button
+                    Background="#3E3E42"
+                    Command="{Binding DeleteCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,5,0">
+                    <PathIcon
+                        Data="{StaticResource DeleteRegular}"
+                        Width="20"
+                        Height="20"
+                        Foreground="White" />
+                </Button>
+            </Panel>
         </Panel>
     </Border>
 </UserControl>

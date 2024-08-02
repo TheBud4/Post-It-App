@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+        xmlns:global="clr-namespace:"
+        xmlns:viewModels="clr-namespace:Post_It_App.ViewModels"
+        mc:Ignorable="d"
+        x:Class="Post_It_App.Views.EditPostWindow"
+        x:DataType="viewModels:EditPostViewModel"
+        Background="#2d2d30"
+        Width="800"
+        Height="350"
+        Title="{Binding Title}">
+
+    <StackPanel
+        Margin="20"
+        Spacing="5">
+        <TextBox
+            Text="{Binding Title, Mode=TwoWay}"
+            BorderBrush="Transparent"
+            Background="Transparent"
+            BorderThickness="0"
+            TextWrapping="NoWrap"
+            Height="52"
+            FontSize="30" 
+            />
+        <TextBox
+            Text="{Binding Description, Mode=TwoWay}"
+            AcceptsReturn="True"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            Background="Transparent"
+            AcceptsTab="True"
+            TextWrapping="Wrap"
+            Height="200"
+            FontSize="20" />
+        <Panel
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Width="790">
+            <Button
+                Command="{Binding SaveCommand}"
+                Margin="0,10,0,10"
+                Background="#007ACC"
+                Width="120"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Center">
+                Salvar
+            </Button>
+            <Button
+                Command="{Binding DeleteCommand}"
+                Margin="0,10,140,10"
+                Background="DarkRed"
+                Width="120"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Right">
+                Deletar
+            </Button>
+        </Panel>
+    </StackPanel>
+</Window>

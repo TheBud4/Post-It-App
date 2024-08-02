@@ -19,17 +19,13 @@ public class MainViewModel : ViewModelBase {
     public MainViewModel() {
         OpenAddPostWindowCommand = new AsyncRelayCommand(OpenAddPostWindow);
 
-        _allPosts = new List<PostViewModel> {
-            new(new PostItem("Titulo Muito grande vai passar da borda", "Descrição do Post")),
-            new(new PostItem("Post", "Descrição muito grande do Post vai passar da borda")),
-        };
+        _allPosts = new List<PostViewModel>();
 
         Posts = new ObservableCollection<PostViewModel>(_allPosts);
 
         foreach (var postViewModel in Posts) {
             postViewModel.PostDeleted += OnPostDeleted;
         }
-        
     }
 
     public ObservableCollection<PostViewModel> Posts { get; set; }
@@ -45,9 +41,9 @@ public class MainViewModel : ViewModelBase {
     public ICommand OpenAddPostWindowCommand { get; }
 
     private async Task OpenAddPostWindow() {
-        var addPostWindow = new AddPostView();
+        var addPostWindow = new AddPostWindow();
         var addPostViewModel = new AddPostViewModel();
-        
+
         addPostWindow.DataContext = addPostViewModel;
 
         if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
@@ -86,7 +82,8 @@ public class MainViewModel : ViewModelBase {
         if (string.IsNullOrWhiteSpace(searchTerm)) {
             foreach (var post in _allPosts)
                 Posts.Add(post);
-        } else {
+        }
+        else {
             foreach (var post in _allPosts.Where(p =>
                          (p.Title?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                          (p.Description?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)))

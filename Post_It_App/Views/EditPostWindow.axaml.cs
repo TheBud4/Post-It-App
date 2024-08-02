@@ -2,8 +2,8 @@ using Avalonia.Controls;
 
 namespace Post_It_App.Views;
 
-public partial class PostView : UserControl {
-    public PostView() {
+public partial class EditPostWindow : Window {
+    public EditPostWindow() {
         InitializeComponent();
     }
 }

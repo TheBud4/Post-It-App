@@ -8,7 +8,7 @@
         d:DesignHeight="450"
         Width="800"
         Height="450"
-        x:Class="Post_It_App.Views.AddPostView"
+        x:Class="Post_It_App.Views.AddPostWindow"
         x:DataType="viewModels:AddPostViewModel"
         Title="Add Post"
         Background="#2d2d30"
@@ -61,6 +61,7 @@
                 <TextBox
                     AcceptsReturn="True"
                     AcceptsTab="True"
+                    TextWrapping="Wrap"
                     Watermark="Descrição da Tarefa:"
                     Opacity="0.5"
                     HorizontalAlignment="Left"
